@@ -74,17 +74,7 @@ const HeroSection = () => {
         })}
       </div>
 
-      {/* ── FULL-WIDTH BANNER IMAGE ── */}
-      <div className="max-w-7xl mx-auto rounded-xl overflow-hidden">
-        <Image
-          src="/banner.jpeg"
-          width={1920}
-          height={600}
-          alt="Dashboard Preview"
-          className="w-full object-cover rounded-xl"
-          priority
-        />
-      </div>
+      
 
     </section>
   );
