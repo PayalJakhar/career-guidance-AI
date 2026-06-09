@@ -1,6 +1,6 @@
 export const features = [
   {
-    title: "AI Career Guidance",
+    title: "Jobs",
     image: "/images/features/ai-career.png",
     icon: "brain",
     description: "Personalized AI career roadmap tailored to your goals.",
