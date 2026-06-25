@@ -133,14 +133,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { checkUser } from "@/lib/checkUser";
-
+import { User } from "lucide-react";
+import HomeLink from "./ui/HomeLink";
 export default async function Header() {
   await checkUser();
 
   return (
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
-        
+        <HomeLink />
         {/* Logo (optional) */}
         {/* 
         <Link href="/">
@@ -257,6 +258,12 @@ export default async function Header() {
               }}
               afterSignOutUrl="/"
             />
+              <Link href="/profile">
+                <Button variant="ghost" className="w-10 h-10 p-0">
+                  <User className="h-5 w-5" />
+                </Button>
+              </Link>
+            
           </SignedIn>
 
         </div>
