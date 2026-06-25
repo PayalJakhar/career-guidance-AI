@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { groq } from "@/lib/groq";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/prisma";
 import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 const ANALYSIS_PROMPT = (text, userProfile) => `
 You are an expert resume reviewer and career coach. Analyze the following resume against the candidate's career goals below.
@@ -137,8 +135,18 @@ export async function POST(request) {
       );
     }
 
-    const result = await model.generateContent(ANALYSIS_PROMPT(extractedText, userProfile));
-    const responseText = result.response.text().trim();
+    const completion = await groq.chat.completions.create({
+  model: "llama-3.3-70b-versatile",
+  messages: [
+    {
+      role: "user",
+      content: ANALYSIS_PROMPT(extractedText, userProfile),
+    },
+  ],
+  temperature: 0.2,
+});
+
+const responseText = completion.choices[0].message.content.trim();
 
     let analysis;
     try {

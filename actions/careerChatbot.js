@@ -1,13 +1,7 @@
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-
-const model = genAI.getGenerativeModel({
-  model: "gemini-2.5-flash",
-});
+import { groq } from "@/lib/groq";
 
 export async function careerChat(message) {
   const { userId } = await auth();
@@ -35,7 +29,14 @@ User question:
 "${message}"
 `;
 
-  const result = await model.generateContent(prompt);
+  // const result = await model.generateContent(prompt);
 
-  return result.response.text();
+  // return result.response.text();
+
+  const completion = await groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
+    messages: [{ role: "user", content: prompt }],
+  });
+
+  return completion.choices[0].message.content;
 }
