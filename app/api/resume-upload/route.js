@@ -162,10 +162,14 @@ const responseText = completion.choices[0].message.content.trim();
     }
 
     return NextResponse.json({ analysis, userProfile });
-  } catch (error) {
+  }  catch (error) {
     console.error("Resume upload/analysis error:", error);
+    console.error("Stack:", error.stack);
+
     return NextResponse.json(
-      { error: "Failed to analyze resume. Please try again." },
+      {
+        error: "Failed to analyze resume. Please try again.",
+      },
       { status: 500 }
     );
   }
