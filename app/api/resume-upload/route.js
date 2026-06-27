@@ -117,11 +117,10 @@ export async function POST(request) {
     let extractedText = "";
 
     if (file.type === "application/pdf") {
-      const { PDFParse } = await import("pdf-parse");
-      const parser = new PDFParse({ data: buffer });
-      const textResult = await parser.getText();
-      extractedText = textResult.text;
-      await parser.destroy();
+      const pdfParse = (await import("pdf-parse")).default;
+
+      const data = await pdfParse(buffer);
+      extractedText = data.text;
     } else {
       const mammoth = require("mammoth");
       const result = await mammoth.extractRawText({ buffer });
