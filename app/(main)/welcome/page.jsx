@@ -12,7 +12,7 @@ export default async function WelcomePage() {
       {/* LEFT IMAGE */}
       <div className="relative hidden md:block h-screen">
         <Image
-          src="/ai-welcome.png"
+          src="/public/images/features/onboarding.jpeg"
           alt="AI Career Coach"
           fill
           className="object-cover"

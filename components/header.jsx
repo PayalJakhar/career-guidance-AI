@@ -159,7 +159,7 @@ export default async function Header() {
           <SignedIn>
 
             {/* Skill Gap Analysis */}
-            <Link href="/skillgap">
+            {/* <Link href="/skillgap">
               <Button
                 variant="outline"
                 className="hidden md:inline-flex items-center gap-2"
@@ -171,10 +171,10 @@ export default async function Header() {
               <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
                 <TrendingUp className="h-4 w-4" />
               </Button>
-            </Link>
+            </Link> */}
 
             {/* Industry Insights */}
-            <Link href="/dashboard">
+            {/* <Link href="/dashboard">
               <Button
                 variant="outline"
                 className="hidden md:inline-flex items-center gap-2"
@@ -186,7 +186,7 @@ export default async function Header() {
               <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
                 <LayoutDashboard className="h-4 w-4" />
               </Button>
-            </Link>
+            </Link> */}
 
             {/* Growth Tools Dropdown */}
             <DropdownMenu>
