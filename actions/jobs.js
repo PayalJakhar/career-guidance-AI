@@ -2,10 +2,7 @@
 
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/prisma";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+import { groq } from "@/lib/groq";
 
 export async function getJobListings() {
   const { userId } = await auth();
@@ -67,8 +64,12 @@ Rules:
 - applyUrl should be the real careers page of the company`;
 
   try {
-    const res = await model.generateContent(prompt);
-    const text = res.response.candidates[0].content.parts[0].text || "[]";
+   const completion = await groq.chat.completions.create({
+  model: "llama-3.3-70b-versatile",
+  messages: [{ role: "user", content: prompt }],
+});
+
+const text = completion.choices[0].message.content;
     const cleaned = text.replace(/```(?:json)?\n?/g, "").trim();
     const jobs = JSON.parse(cleaned);
     return {

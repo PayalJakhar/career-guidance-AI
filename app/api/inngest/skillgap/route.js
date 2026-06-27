@@ -1,25 +1,25 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/prisma";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { groq } from "@/lib/groq";
 import { computeRuleBasedGap } from "@/lib/ml/skill-rules";
 
 // Initialize Gemini AI
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
 
 export async function GET() {
   try {
-    // Check for GEMINI_API_KEY
-    if (!process.env.GEMINI_API_KEY) {
-      console.error("GEMINI_API_KEY is not set");
-      return NextResponse.json(
-        {
-          error: "Configuration error",
-          details: "GEMINI_API_KEY not configured",
-        },
-        { status: 500 }
-      );
-    }
+  if (!process.env.GROQ_API_KEY) {
+    console.error("GROQ_API_KEY is not set");
+
+    return NextResponse.json(
+      {
+        error: "Configuration error",
+        details: "GROQ_API_KEY not configured",
+      },
+      { status: 500 }
+    );
+  }
 
     const { userId } = await auth();
 
@@ -60,7 +60,6 @@ export async function GET() {
     }
 
     // Generate skill gap analysis using Gemini AI
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const prompt = `
 You are a career development expert. Analyze the skill gap between the following roles:
@@ -143,9 +142,17 @@ Provide a comprehensive skill gap analysis in the following JSON format (ONLY JS
   "summary": "You have a solid foundation in manual testing and bug tracking. To transition to ${user.targetRole}, focus on developing test automation skills (Selenium/Cypress), API testing capabilities, and CI/CD integration knowledge. Your experience with JIRA is a great asset. With 6 months of dedicated learning and practice, you can bridge this gap effectively."
 }`;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    const completion = await groq.chat.completions.create({
+  model: "llama-3.3-70b-versatile",
+  messages: [
+    {
+      role: "user",
+      content: prompt,
+    },
+  ],
+});
+
+const text = completion.choices[0].message.content;
 
     console.log("Gemini Response:", text); // Debug log
 

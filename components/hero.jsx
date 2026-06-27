@@ -74,7 +74,7 @@ const HeroSection = () => {
         })}
       </div>
 
-      
+      {/* ── FULL-WIDTH BANNER IMAGE ── */}
 
     </section>
   );

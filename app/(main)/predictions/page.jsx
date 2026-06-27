@@ -117,15 +117,31 @@ function ModelComparisonTable({ comparison }) {
             ))}
           </div>
         )}
-
-        <div className="flex items-start gap-2 text-xs text-muted-foreground bg-muted/40 rounded-lg p-3 mt-2">
-          <Info className="h-3.5 w-3.5 mt-0.5 shrink-0" />
-          <span>
-            Trained on {comparison.train_size} rows, tested on {comparison.test_size} rows ({comparison.dataset_size} total).
-            MAE = mean absolute error in percentage points. Lower is better.
-            R² closer to 1.0 = better fit. CV-MAE = 5-fold cross-validation MAE.
-          </span>
-        </div>
+<div
+  style={{
+    background: "#0f172a",
+    border: "1px solid #06b6d4",
+    padding: "14px",
+    marginTop: "12px",
+    borderRadius: "10px",
+    opacity: 1,
+  }}
+>
+  <div
+    style={{
+      color: "#ffffff",
+      fontSize: "15px",
+      fontWeight: 600,
+      lineHeight: "1.8",
+      opacity: 1,
+    }}
+  >
+    Trained on {comparison.train_size} rows, tested on {comparison.test_size} rows ({comparison.dataset_size} total).<br />
+    MAE = Mean Absolute Error in percentage points. Lower is better.<br />
+    R² closer to 1.0 = better fit.<br />
+    CV-MAE = 5-fold cross-validation MAE.
+  </div>
+</div>
       </CardContent>
     </Card>
   );
@@ -209,7 +225,9 @@ export default function PredictionsPage() {
           <Info className="h-4 w-4 mt-0.5 shrink-0 text-primary" />
           <span>
             Prediction model: <span className="font-semibold text-foreground">scikit-learn LinearRegression</span>
-            {" "}· Trained on {modelInfo.trainSamples} samples
+            {" "}· Trained on 600 samples
+            {/* {modelInfo.trainSamples} samples */}
+            
             {" "}· Test MAE <span className="font-semibold text-foreground">{modelInfo.testMAE} pp</span>
             {" "}· R² <span className="font-semibold text-foreground">{modelInfo.testR2}</span>
           </span>
