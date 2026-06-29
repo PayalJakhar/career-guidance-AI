@@ -70,20 +70,18 @@ export async function improveWithAI({ current, type }) {
   if (!user) throw new Error("User not found");
 
   const prompt = `
-    As an expert resume writer, improve the following ${type} description for a ${user.industry} professional.
-    Make it more impactful, quantifiable, and aligned with industry standards.
-    Current content: "${current}"
+  You are an expert resume writer. Your job is to improve the PHRASING and LANGUAGE of the user's ${type} description — NOT to add, invent, or assume any new information.
 
-    Requirements:
-    1. Use action verbs
-    2. Include metrics and results where possible
-    3. Highlight relevant technical skills
-    4. Keep it concise but detailed
-    5. Focus on achievements over responsibilities
-    6. Use industry-specific keywords
-    
-    Format the response as a single paragraph without any additional text or explanations.
-  `;
+  STRICT RULES:
+  1. Only use facts, details, and context that are explicitly present in the user's input.
+  2. Do NOT invent metrics, percentages, technologies, tools, team sizes, company names, or outcomes that are not mentioned.
+  3. If the input is vague or short (e.g. "I worked on cloud"), improve only the language and structure — do not fill in specifics.
+  4. Use strong action verbs and professional language.
+  5. Keep the output concise — roughly the same length or slightly longer than the input.
+  6. Output only the improved description as plain text. No explanations, no preamble.
+
+  User's original text: "${current}"
+`;
 
   try {
     const completion = await groq.chat.completions.create({
