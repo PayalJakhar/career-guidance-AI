@@ -6,14 +6,14 @@
     "role_similarity"
   ],
   "coef": [
-    0.218900,
-    0.371200,
-    3.479400,
-    0.127000
+    0.222159,
+    0.349165,
+    4.316742,
+    0.142603
   ],
-  "intercept": 4.182600,
-  "train_samples": 240,
-  "test_mae": 9.43,
-  "test_r2": 0.7635,
-  "note": "4-feature model (no leakage). Predicts skills_coverage from quiz, experience, quizzes_taken, role_similarity. Re-run npm run ml:retrain after DB export for updated weights."
+  "intercept": -0.071981,
+  "train_samples": 244,
+  "test_mae": 10.8927,
+  "test_r2": 0.7086,
+  "note": "Best overall model: Linear Regression (MAE=10.8927). Predicts skills_coverage from quiz + experience (no leakage). Node.js uses Linear Regression weights for inference."
 }

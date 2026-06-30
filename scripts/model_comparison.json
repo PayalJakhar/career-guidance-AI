@@ -1,25 +1,43 @@
 {
-  "dataset_size": 301,
-  "train_size": 240,
+  "dataset_size": 305,
+  "train_size": 244,
   "test_size": 61,
   "results": [
-    { "model": "Linear Regression", "mae": 9.4306, "rmse": 11.32, "r2": 0.7635, "cv_mae": 11.05 },
-    { "model": "Random Forest",     "mae": 9.51,   "rmse": 12.18, "r2": 0.7264, "cv_mae": 10.09 },
-    { "model": "XGBoost",           "mae": 9.95,   "rmse": 12.19, "r2": 0.7261, "cv_mae": 10.49 }
+    {
+      "model": "Linear Regression",
+      "mae": 10.8927,
+      "rmse": 13.4517,
+      "r2": 0.7086,
+      "cv_mae": 11.2526
+    },
+    {
+      "model": "Random Forest",
+      "mae": 11.1382,
+      "rmse": 15.4327,
+      "r2": 0.6164,
+      "cv_mae": 10.3753
+    },
+    {
+      "model": "XGBoost",
+      "mae": 10.9062,
+      "rmse": 14.4937,
+      "r2": 0.6617,
+      "cv_mae": 10.3245
+    }
   ],
   "best_model": "Linear Regression",
   "feature_importances": {
     "Random Forest": {
-      "avg_quiz_score":  0.1607,
-      "experience_norm": 0.7130,
-      "quizzes_taken":   0.0198,
-      "role_similarity": 0.1066
+      "avg_quiz_score": 0.2092,
+      "experience_norm": 0.6321,
+      "quizzes_taken": 0.0337,
+      "role_similarity": 0.125
     },
     "XGBoost": {
-      "avg_quiz_score":  0.0365,
-      "experience_norm": 0.8222,
-      "quizzes_taken":   0.0328,
-      "role_similarity": 0.1086
+      "avg_quiz_score": 0.0572,
+      "experience_norm": 0.7369,
+      "quizzes_taken": 0.0703,
+      "role_similarity": 0.1356
     }
   }
 }
